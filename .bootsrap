@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+
+echo "Starting bootstrapping"
+
+# Create the projects folder
+mkdir ~/dev
+
+# Oh My Zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
+###############################################################################
+# Node, NPM and Yarn                                                          #
+###############################################################################
+
+# Install NVM
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
+
+# Install lates Node
+nvm install node
+
+# Install Yarn
+npm install --global yarn
+
+# NPM update checker
+npm install -g npm-check-updates
+
+
+###############################################################################
+# Homebrew                                                                    #
+###############################################################################
+
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.bootstrap` has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# Check for Homebrew, install if we don't have it
+if test ! $(which brew); then
+    echo "Installing homebrew..."
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+# Update homebrew recipes
+brew update
+
+# TODO: Setup aliases for command line tools
+PACKAGES=(
+    cloc
+    git
+    exa
+    htop
+    jesseduffield/lazydocker/lazydocker
+    ripgrep
+)
+
+echo "Installing packages..."
+brew install ${PACKAGES[@]}
+
+echo "Cleaning up..."
+brew cleanup
+
+
+###############################################################################
+# Git                                                                         #
+###############################################################################
+
+# Remove default Git (installed previously with Homebrew)
+sudo mv /usr/bin/git /usr/bin/git-apple
+
+git config --global user.name "Firstname Lastname"
+git config --global user.email "firstname.lastname@example.com"
+git config --global color.ui true
+
+
+###############################################################################
+# SSH                                                                         #
+###############################################################################
+
+# Generate SSH keys
+ssh-keygen -t rsa -C "firstname.lastname@example.com" -f ~/.ssh/id_rsa
+
+
+###############################################################################
+# Misc                                                                        #
+###############################################################################
+
+# Quickly open Alko's beer selection from command line
+echo "alias oispa='open https://www.alko.fi/tuotteet/tuotelistaus?SearchTerm=olut'" >> ~/.zshrc
+
+# Enable changes
+source ~/.zshrc
+
+echo "Bootstrapping complete"
+echo "Get your public SSH key: cat ~/.ssh/id_rsa.pub"
