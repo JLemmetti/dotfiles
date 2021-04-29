@@ -11,6 +11,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # Fix permissions
 chmod g-w,o-w /usr/local/share/zsh /usr/local/share/zsh/site-functions
 
+
 ###############################################################################
 # Node, NPM and Yarn                                                          #
 ###############################################################################
@@ -93,7 +94,6 @@ cat << EOF >> ~/.zprofile
 # Add Visual Studio Code (code)
 export PATH="\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 EOF
-
 
 # Quickly open Alko's beer selection from command line
 printf "\nalias oispa='open https://www.alko.fi/tuotteet/tuotelistaus?SearchTerm=olut'" >> ~/.zshrc
