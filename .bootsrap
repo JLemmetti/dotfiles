@@ -86,6 +86,13 @@ ssh-keygen -t rsa -C "firstname.lastname@example.com" -f ~/.ssh/id_rsa
 # Misc                                                                        #
 ###############################################################################
 
+# Use `code` to open VS Code from command line
+cat << EOF >> ~/.zprofile
+# Add Visual Studio Code (code)
+export PATH="\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+EOF
+
+
 # Quickly open Alko's beer selection from command line
 echo "alias oispa='open https://www.alko.fi/tuotteet/tuotelistaus?SearchTerm=olut'" >> ~/.zshrc
 
