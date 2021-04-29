@@ -8,6 +8,8 @@ mkdir ~/dev
 # Oh My Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
+# Fix permissions
+chmod g-w,o-w /usr/local/share/zsh /usr/local/share/zsh/site-functions
 
 ###############################################################################
 # Node, NPM and Yarn                                                          #
