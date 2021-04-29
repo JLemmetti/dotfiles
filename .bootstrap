@@ -96,10 +96,10 @@ EOF
 
 
 # Quickly open Alko's beer selection from command line
-echo "alias oispa='open https://www.alko.fi/tuotteet/tuotelistaus?SearchTerm=olut'" >> ~/.zshrc
+printf "\nalias oispa='open https://www.alko.fi/tuotteet/tuotelistaus?SearchTerm=olut'" >> ~/.zshrc
 
 # Enable changes
 source ~/.zshrc
 
-echo "Bootstrapping complete"
-echo "Get your public SSH key: cat ~/.ssh/id_rsa.pub"
+printf "\n\nBootstrapping complete"
+printf "\n\nGet your public SSH key: cat ~/.ssh/id_rsa.pub\n\n"
