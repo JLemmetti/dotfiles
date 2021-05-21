@@ -47,7 +47,6 @@ fi
 # Update homebrew recipes
 brew update
 
-# TODO: Setup aliases for command line tools
 PACKAGES=(
     cloc
     git
@@ -63,6 +62,10 @@ brew install ${PACKAGES[@]}
 echo "Cleaning up..."
 brew cleanup
 
+# Create alases
+printf "\nalias ls=exa" >> ~/.zshrc
+printf "\nalias top=htop" >> ~/.zshrc
+printf "\nalias grep=rg" >> ~/.zshrc
 
 ###############################################################################
 # Git                                                                         #
