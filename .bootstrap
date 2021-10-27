@@ -11,6 +11,13 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # Fix permissions
 chmod g-w,o-w /usr/local/share/zsh /usr/local/share/zsh/site-functions
 
+
+###############################################################################
+# Install  Xcode Command-line Tools (Not tested!)                             #
+###############################################################################
+
+xcode-select --install
+
 ###############################################################################
 # Node, NPM and Yarn                                                          #
 ###############################################################################
