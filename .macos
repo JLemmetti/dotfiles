@@ -6,12 +6,16 @@ echo "Setting sensible defaults for MacOS..."
 sudo -v
 
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+done 2>/dev/null &
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
 
-# Always show scrollbars
+# Always show scroll bars
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 # Possible values: `WhenScrolling`, `Automatic` and `Always`
 
@@ -95,8 +99,8 @@ defaults write com.apple.dock autohide -bool true
 # 11: Launchpad
 # 12: Notification Center
 # 13: Lock Screen
-# Top left screen corner → Mission Control
-defaults write com.apple.dock wvous-tl-corner -int 0
+# Top left screen corner → Disable screen saver
+defaults write com.apple.dock wvous-tl-corner -int 6
 defaults write com.apple.dock wvous-tl-modifier -int 0
 # Top right screen corner → Desktop
 defaults write com.apple.dock wvous-tr-corner -int 4
@@ -109,20 +113,20 @@ defaults write com.apple.dock wvous-bl-modifier -int 0
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 for app in "Activity Monitor" \
-"Address Book" \
-"Calendar" \
-"cfprefsd" \
-"Contacts" \
-"Dock" \
-"Finder" \
-"Mail" \
-"Messages" \
-"Photos" \
-"Safari" \
-"SystemUIServer" \
-"Terminal" \
-"iCal"; do
-    killall "${app}" &> /dev/null
+    "Address Book" \
+    "Calendar" \
+    "cfprefsd" \
+    "Contacts" \
+    "Dock" \
+    "Finder" \
+    "Mail" \
+    "Messages" \
+    "Photos" \
+    "Safari" \
+    "SystemUIServer" \
+    "Terminal" \
+    "iCal"; do
+    killall "${app}" &>/dev/null
 done
 
 printf "\n\nDone! Note that some of these changes require a logout/restart to take effect."
