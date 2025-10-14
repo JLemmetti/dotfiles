@@ -40,3 +40,6 @@ function review() {
 
   echo -e "\n\bA new worktree created at ${YELLOW}${TARGET_FOLDER}/${NC}\n"
 }
+
+# Quickly open Alko's beer selection from command line
+alias oispa='open https://www.alko.fi/tuotteet/tuotelistaus?SearchTerm=olut'
