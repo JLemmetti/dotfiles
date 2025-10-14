@@ -3,7 +3,7 @@
 Basic settings for new computer. Inspired by
 [dotfiles](https://github.com/mathiasbynens/dotfiles) from Mathias Bynens.
 
-**NOTE:** Remember to update your Git and SSH key gen settings in `.bootstrap`.
+**NOTE:** Remember to update your name and email in `.bootstrap`.
 
 ## Install
 
