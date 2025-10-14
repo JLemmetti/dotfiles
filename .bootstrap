@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+FIRST_NAME="Firstname"
+LAST_NAME="Lastname"
+FULL_NAME="$FIRST_NAME $LAST_NAME"
+EMAIL="firstname.lastname@example.com"
+
 echo "Starting bootstrapping"
 
 # Create the projects folder
@@ -11,23 +16,21 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # Fix permissions
 chmod g-w,o-w /usr/local/share/zsh /usr/local/share/zsh/site-functions
 
-
 ###############################################################################
 # Node, NPM and Yarn                                                          #
 ###############################################################################
 
 # Install NVM
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.40.3/install.sh | bash
 
-# Install lates Node
+# Install latest Node
 nvm install node
 
 # Install Yarn
-npm install --global yarn
+# npm install --global yarn
 
 # NPM update checker
-npm install -g npm-check-updates
-
+# npm install -g npm-check-updates
 
 ###############################################################################
 # Homebrew                                                                    #
@@ -37,7 +40,11 @@ npm install -g npm-check-updates
 sudo -v
 
 # Keep-alive: update existing `sudo` time stamp until `.bootstrap` has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+done 2>/dev/null &
 
 # Check for Homebrew, install if we don't have it
 if test ! $(which brew); then
@@ -48,13 +55,10 @@ fi
 # Update homebrew recipes
 brew update
 
-# TODO: Setup aliases for command line tools
 PACKAGES=(
+    tmux
     cloc
     git
-    exa
-    htop
-    jesseduffield/lazydocker/lazydocker
     ripgrep
 )
 
@@ -64,7 +68,6 @@ brew install ${PACKAGES[@]}
 echo "Cleaning up..."
 brew cleanup
 
-
 ###############################################################################
 # Git                                                                         #
 ###############################################################################
@@ -72,34 +75,35 @@ brew cleanup
 # Remove default Git (installed previously with Homebrew)
 sudo mv /usr/bin/git /usr/bin/git-apple
 
-git config --global user.name "Firstname Lastname"
-git config --global user.email "firstname.lastname@example.com"
+git config --global user.name "$FULL_NAME"
+git config --global user.email "$EMAIL"
 git config --global color.ui true
-
 
 ###############################################################################
 # SSH                                                                         #
 ###############################################################################
 
 # Generate SSH keys
-ssh-keygen -t rsa -C "firstname.lastname@example.com" -f ~/.ssh/id_rsa
-
+ssh-keygen -t rsa -C "$EMAIL" -f ~/.ssh/id_rsa
 
 ###############################################################################
 # Misc                                                                        #
 ###############################################################################
 
 # Use `code` to open VS Code from command line
-cat << EOF >> ~/.zprofile
+cat <<EOF >>~/.zprofile
 # Add Visual Studio Code (code)
 export PATH="\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 EOF
 
-# Quickly open Alko's beer selection from command line
-printf "\nalias oispa='open https://www.alko.fi/tuotteet/tuotelistaus?SearchTerm=olut'" >> ~/.zshrc
+# Copy .zprofile and .tmux.conf to home directory
+cp configuration/.zprofile ~/.zprofile
+cp configuration/.tmux.conf ~/.tmux.conf
 
 # Enable changes
 source ~/.zshrc
+source ~/.zprofile
+source ~/.tmux.conf
 
 printf "\n\nBootstrapping complete"
 printf "\n\nGet your public SSH key: cat ~/.ssh/id_rsa.pub\n\n"
