@@ -19,6 +19,14 @@ source .bootstrap && source .macos
   - `System Preferences > Accessibility > Mouse & Trackpad > Trackpad options > Enable dragging > three finger drag`
 - Add empty space to dock
   - `defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'; killall Dock`
+  - Test:
+
+```bash
+defaults write com.apple.AppleMultitouchTrackpad DragLock -bool false
+defaults write com.apple.AppleMultitouchTrackpad Dragging -bool false
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
+```
+
 - Move between words with alt + arrow keys in iTerm
   - `iTerm Preferences > Profiles > Select your profile > Keys tab > Click Load Preset > Choose Natural Text Editing`
 
