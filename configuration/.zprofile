@@ -42,4 +42,4 @@ function review() {
 }
 
 # Quickly open Alko's beer selection from command line
-alias oispa='open https://www.alko.fi/tuotteet/tuotelistaus?SearchTerm=olut'
+alias oispa='open https://www.alko.fi/tuotteet/tuotelistaus\?SearchTerm=olut'
